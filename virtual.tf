@@ -1,8 +1,8 @@
-resource "oci_core_instance" "tformdbox1" {
+resource "oci_core_instance" "proddbox1" {
   availability_domain = "Pjgw:US-ASHBURN-AD-1"
   compartment_id      = var.compartment_id
   shape               = "VM.Standard1.1"
-  display_name        = "Terraform Demo Box"
+  display_name        = "Prod Terraform Demo Box"
 
   agent_config {
     is_monitoring_disabled = true
@@ -11,8 +11,8 @@ resource "oci_core_instance" "tformdbox1" {
   create_vnic_details {
     assign_public_ip = true
     display_name     = "Primary VNIC"
-    hostname_label   = "tformdbox1"
-    subnet_id        = oci_core_subnet.demo-box.id
+    hostname_label   = "proddbox1"
+    subnet_id        = oci_core_subnet.prod-subnet.id
   }
 
   # metadata = {
@@ -25,15 +25,15 @@ resource "oci_core_instance" "tformdbox1" {
   }
 }
 
-output "tformdbox1-Public-IP" {
-  value = [oci_core_instance.tformdbox1.public_ip]
+output "proddbox1-Public-IP" {
+  value = [oci_core_instance.proddbox1.public_ip]
 }
 
-resource "oci_core_instance" "tformdbox2" {
+resource "oci_core_instance" "proddbox2" {
   availability_domain = "Pjgw:US-ASHBURN-AD-1"
   compartment_id      = var.compartment_id
   shape               = "VM.Standard1.1"
-  display_name        = "Terraform Demo Box 2"
+  display_name        = "Prod Terraform Demo Box 2"
 
   agent_config {
     is_monitoring_disabled = true
@@ -42,8 +42,8 @@ resource "oci_core_instance" "tformdbox2" {
   create_vnic_details {
     assign_public_ip = true
     display_name     = "Primary VNIC"
-    hostname_label   = "tformdbox2"
-    subnet_id        = oci_core_subnet.demo-box.id
+    hostname_label   = "proddbox2"
+    subnet_id        = oci_core_subnet.prod-subnet.id
   }
 
   # metadata = {
@@ -56,6 +56,6 @@ resource "oci_core_instance" "tformdbox2" {
   }
 }
 
-output "tformdbox2-Public-IP" {
-  value = [oci_core_instance.tformdbox2.public_ip]
+output "proddbox2-Public-IP" {
+  value = [oci_core_instance.proddbox2.public_ip]
 }
